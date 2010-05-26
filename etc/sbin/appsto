@@ -1,0 +1,36 @@
+#!/system/bin/sh
+case $1 in
+sd)
+	# SDX noobnl's app2sd
+	mkdir /system/sd
+	chown 1000:1000 /system/sd
+	chmod 0771 /system/sd
+	mount -t ext2 /dev/block/mmcblk0p2 /system/sd
+	mkdir /system/sd/app
+	cd /data/app
+	busybox cp * /system/sd/app
+	rm -r /data/app/
+	ln -s /system/sd/app /data/app
+	echo "mount -t ext2 /dev/block/mmcblk0p2 /system/sd" >> /system/etc/install-recovery.sh
+	exit 0;;
+cache)
+	# SDX noobnl's app2cache
+	mkdir /cache/app
+	chown 1000:1000 /cache/app
+	chmod 0771 /cache/app
+	cd /data/app
+	busybox cp * /cache/app
+	rm -r /data/app
+	ln -s /cache/app /data/app
+	exit 0;;
+data)
+	old=`readlink /data/app`
+	rm /data/app
+	mkdir /data/app
+	cp $old/* /data/app/
+	rm -r $old
+	exit 0;;
+*)
+	echo "Usage: appsto sd|cache|data"
+	exit 1;;
+esac

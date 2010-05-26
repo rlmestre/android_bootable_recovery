@@ -1,0 +1,80 @@
+on init
+
+# S.LSI FIX : output console directly 
+# GyuTae FIX : we should not use system partition!!!!!
+	export PATH /sbin:/bin:/system/bin
+
+	export ANDROID_DATA /data
+	export EXTERNAL_STORAGE /sdcard
+
+	mkdir /sdcard
+	mkdir /sdext
+	mkdir /system
+	mkdir /data
+	mkdir /cache
+        mount tmpfs nodev /tmp
+
+	symlink /sbin/busybox /sbin/sh
+	symlink /sbin/busybox /system/bin/sh
+ 
+# S.LSI FIX START: output console directly 
+        insmod /lib/modules/xsr.ko
+        insmod /lib/modules/dpram.ko
+ 
+        insmod /lib/modules/xsr_stl.ko
+		insmod /lib/modules/rfs.ko
+#		insmod /lib/modules/yaffs2.ko
+		insmod /lib/modules/param.ko 
+	 
+        mkdir /sdcard 0000 system system
+        mkdir /data 0771 system system
+        mkdir /cache 0770 system cache
+ 
+        #mount yaffs2 /dev/bml5 /system
+    	mount rfs /dev/stl5 /system xattr,check=no
+# S.LSI FIX END
+
+on boot
+       write /sys/class/sec/switch/uart_sel MODEM
+       write /sys/class/sec/switch/usb_sel PDA
+
+	ifup lo
+	hostname localhost
+	domainname localdomain
+
+	class_start default
+	
+	service busybox /sbin/busybox --install -s /bin
+		oneshot
+
+service loadkeys /sbin/loadkeys /sbin/consolemap
+	oneshot
+
+service fbcon /sbin/start_fbcon
+	disabled
+	oneshot
+
+service stop_fbcon /sbin/stop_fbcon
+	disabled
+	oneshot
+
+service recovery /sbin/recovery
+	oneshot
+
+service fixdirs /sbin/fixdirs.sh
+	oneshot
+
+service con /sbin/busybox openvt -w -f -c 1 /sbin/vtspawn
+	disabled
+
+service adbd /sbin/adbd recovery
+	oneshot
+
+on property:init.svc.recovery=stopped	
+	start fbcon
+	start con
+
+on property:init.svc.con=restarting
+	start recovery
+	start stop_fbcon
+	stop con

@@ -1,0 +1,8 @@
+#!/sbin/sh
+
+for i in softcursor fbcon_ccw fbcon_cw fbcon_ud fbcon_rotate bitblit font fbcon;
+do
+	insmod /lib/modules/$i.ko;
+done;
+
+echo 1 > /sys/class/graphics/fbcon/rotate_all

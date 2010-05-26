@@ -1,0 +1,92 @@
+keymaps 0,8,1,4
+# Don't change this line unless you want to rewrite this entire thing :)
+# Here's how it works, the keymaps above mean how each key is modified
+# by column. Example:
+#			one exclam exclam nul
+# means key 45 (one) will output one when pressed alone, exclamation when
+# pressed with Alt (Fn), exclamation when pressed with Shift (Arrow),
+# and nothing when pressed with Control (DPAD center). Trailing nuls can
+# be omitted (note that's only one L in nul). Basically that's columns: 
+# alone, with Fn, with Shift, and with Control (DPAD center).
+
+# First row
+keycode 38 = F99
+keycode 45 = one exclam exclam
+keycode 60 = two at at
+keycode 63 = three numbersign numbersign
+keycode 55 = four dollar dollar
+keycode 47 = five percent percent
+keycode 39 = six asciicircum asciicircum
+keycode 31 = seven ampersand ampersand
+keycode 23 = eight asterisk asterisk
+keycode 15 = nine parenleft parenleft
+keycode 7 = zero parenright parenright
+keycode 20 = BackSpace
+
+# Second row
+keycode 59 = Control
+keycode 53 = q nul Q Control_q
+keycode 58 = w asciitilde W Control_w
+keycode 46 = e plus E Control_e
+keycode 44 = r minus R Control_r
+keycode 43 = t underscore T Control_t
+keycode 42 = y slash Y Control_y
+keycode 14 = u braceleft U Control_u
+keycode 13 = i braceright I Control_i
+keycode 12 = o bracketleft O Control_o
+keycode 11 = p bracketright P Control_p
+keycode 21 = Up
+keycode 26 = KP_Enter
+
+keycode 54 = Shift
+Keycode 61 = a bar A Control_a
+keycode 37 = s backslash S Control_s
+keycode 36 = d less D Control_d
+keycode 35 = f greater F Control_f
+keycode 34 = g equal G Control_g
+keycode 6 = h colon H Control_h
+keycode 5 = j semicolon J Control_j
+keycode 4 = k apostrophe K Control_k
+keycode 3 = l quotedbl L Control_l
+keycode 2 = Left
+keycode 18 = Right
+
+# Third row
+keycode 62 = z nul Z Control_z
+keycode 52 = x Tab X Control_x
+keycode 51 = c nul C Control_c
+keycode 50 = v nul V Control_v
+keycode 22 = space
+keycode 30 = b nul B Control_b
+keycode 29 = n nul N Control_n
+keycode 28 = m question M Control_m
+keycode 19 = period comma
+keycode 27 = Down
+
+# respectively: DPAD center, Home, Send
+# Back, vol-up, vol-down, voice dial,
+# Focus, Camera, Menu, End
+keycode 41 = Alt
+keycode 102 = F100
+keycode 9 = Tab
+keycode 158 = nul
+keycode 17 = nul
+keycode 25 = nul
+keycode 10 = nul
+keycode 1 = nul
+keycode 57 = nul
+keycode 139 = nul
+keycode 249 = Control_c
+
+# DPAD directions when slider open
+keycode 106 = Up Scroll_Backward
+keycode 105 = Down Scroll_Forward
+keycode 103 = Left
+keycode 108 = Right
+
+# Strings can be declared for any value loadkeys doesn't understand.
+# That way, you can use your own custom commands, which will be outputted
+# to the console, which means if you want something to be automatically
+# executed, be sure to include a line break (\n) ;).
+string F99 = "find -iname "
+string F100 = "exit\n"
