@@ -527,9 +527,6 @@ int ui_scroll_menu(int dir) {
     if (proceed) {
 	int x = 0;
 
-	if (x+dir < 0) move = 0;
-	if (x+dir >= menu_items) move = text_rows-8-menu_top;
-	
 	for (x=menu_start; x < menu_start+text_rows-8-menu_top; x++) {
 	    strncpy(menu[menu_top+x-menu_start], menu_list[x+dir], text_cols-1);
 	    menu[menu_top+x-menu_start][text_cols-1] = '\0';

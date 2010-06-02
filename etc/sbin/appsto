@@ -22,6 +22,9 @@ cache)
 	busybox cp * /cache/app
 	rm -r /data/app
 	ln -s /cache/app /data/app
+	cat /system/etc/install-recovery.sh | sed 's/mount -t ext2 \/dev\/block\/mmcblk0p2 \/system\/sd//' | sed '/^$/d' > /temp
+	rm /system/etc/install-recovery.sh
+	mv /temp /system/etc/install-recovery.sh
 	exit 0;;
 data)
 	old=`readlink /data/app`
@@ -29,6 +32,9 @@ data)
 	mkdir /data/app
 	cp $old/* /data/app/
 	rm -r $old
+	cat /system/etc/install-recovery.sh | sed 's/mount -t ext2 \/dev\/block\/mmcblk0p2 \/system\/sd//' | sed '/^$/d' > /temp
+	rm /system/etc/install-recovery.sh
+	mv /temp /system/etc/install-recovery.sh
 	exit 0;;
 *)
 	echo "Usage: appsto sd|cache|data"

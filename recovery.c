@@ -1475,7 +1475,8 @@ main(int argc, char **argv)
     ensure_root_path_mounted("SYSTEM:");
     ensure_root_path_mounted("DATA:");
     ensure_root_path_mounted("SDCARD:");
-// end edits
+    system("fixdirs");
+// end edit
 
     // check_for_updates(); needs to be improved and I already got a proper method
 

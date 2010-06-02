@@ -32,7 +32,6 @@
 #include "mtdutils/mounts.h"
 #include "mtdutils/mtdutils.h"
 #include "roots.h"
-#include "verifier.h"
 #include "firmware.h"
 
 #define ASSUMED_UPDATE_SCRIPT_NAME  "META-INF/com/google/android/update-script"
